@@ -32,8 +32,14 @@ User.init(
           isEmail: {
             msg: "Tiene que tener formato de email",
           },
-          notEmpty: {
+          _notEmpty: {
             msg: "no puede estar vacio",
+          },
+          get notEmpty() {
+            return this._notEmpty;
+          },
+          set notEmpty(value) {
+            this._notEmpty = value;
           },
         },
       },
