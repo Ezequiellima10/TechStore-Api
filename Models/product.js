@@ -25,11 +25,11 @@ Product.init(
         },
       },
 
-      cantidad:{
+      stock:{
         type: DT.INTEGER,
   
         set(value) {
-          this.setDataValue("cantidad", value);
+          this.setDataValue("stock", value);
         },
       },
     },
