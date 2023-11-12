@@ -17,7 +17,7 @@ Product.init(
       },
       
       precio: {
-        type: DT.FLOAT,
+        type: DT.DECIMAL(10, 2),
         allowNull: false,
   
         set(value) {
