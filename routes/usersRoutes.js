@@ -9,5 +9,6 @@ usersRoutes.get("/:id", userController.getUserById);
 usersRoutes.post("", userController.createUser);
 usersRoutes.put("/:id", userController.updateUser);
 usersRoutes.delete("/:id", userController.deleteUser);
+usersRoutes.buyProducts("/addProduct/:id", userController.addProductToUser);
 
 export default usersRoutes;
