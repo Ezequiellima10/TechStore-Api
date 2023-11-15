@@ -11,6 +11,7 @@ User.hasMany(Order, { as: 'ordenes' });
 Order.belongsTo(User);
 
 
+
 export {
     Product,
     User,

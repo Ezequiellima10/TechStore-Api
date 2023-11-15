@@ -2,28 +2,28 @@ import connection from "../connection/connection.js";
 import Product from "../Models/product.js";
 import User from "../Models/user.js";
 class UserController {
-  constructor() {}
+  constructor() {} 
 
 
   addProductToUser = async (req, res) => {
     const userId = req.params.userId; //Obtengo los ids  del usuario y producto pasados por paramtetro
     const { productId } = req.body; 
-
+  
     try {
       // Verificar si el usuario y el producto existen
-      const user = null;await User.findByPk(userId);
+      const user = await User.findByPk(userId);
       const product = await Product.findByPk(productId);
-
+  
       if (!user || !product) {
         return res.status(404).json({ message: 'Usuario o producto no encontrado' });
       }  
-
+  
       // Agrega la relación entre el usuario y el producto en la tabla intermedia
       await UserProduct.create({
         UserId: userId,
         ProductId: productId,
       });
-
+  
       return res.status(201).json({ message: 'Producto agregado al usuario con éxito' });
     } catch (error) {
       console.error('Error al agregar producto a usuario:', error);
@@ -100,7 +100,7 @@ class UserController {
     });
   };
 
-  
+
   deleteUser = (req, res) => {
     const { id } = req.params;
 
