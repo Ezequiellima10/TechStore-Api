@@ -20,7 +20,7 @@ const connection = new Sequelize(database, username, password, {
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
-  
+
   export default connection;
 
  

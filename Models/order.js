@@ -29,7 +29,7 @@ Order.init(
       fecha: {
         type: DT.DATE,
         allowNull: false,
-  
+
         set(value) {
           this.setDataValue("fecha", value);
         },

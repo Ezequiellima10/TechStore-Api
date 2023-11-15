@@ -1,13 +1,15 @@
 import connection from "../connection/connection.js";
 import Product from "../Models/product.js";
 import User from "../Models/user.js";
+import UserProduct from "../Models/userProduct.js";
 class UserController {
   constructor() {} 
 
 
   addProductToUser = async (req, res) => {
-    const userId = req.params.userId; //Obtengo los ids  del usuario y producto pasados por paramtetro
-    const { productId } = req.body; 
+    const userId = req.params.id; //Obtengo los ids  del usuario y producto pasados por paramtetro
+    const productId = req.body.productId; 
+
   
     try {
       // Verificar si el usuario y el producto existen
@@ -17,11 +19,11 @@ class UserController {
       if (!user || !product) {
         return res.status(404).json({ message: 'Usuario o producto no encontrado' });
       }  
-  
+      
       // Agrega la relación entre el usuario y el producto en la tabla intermedia
       await UserProduct.create({
-        UserId: userId,
-        ProductId: productId,
+        userId: userId,
+        productId: productId,
       });
   
       return res.status(201).json({ message: 'Producto agregado al usuario con éxito' });
@@ -45,7 +47,7 @@ class UserController {
   getUserById = (req, res) => {
     const { id } = req.params;
   
-    const query = `SELECT * FROM user WHERE id = ${id}`;
+    const query = `SELECT * FROM users WHERE id = ${id}`;
   
     connection.query(query).then(result => {
       res.status(200).send({ success: true, user: result[0] }); 
@@ -59,7 +61,7 @@ class UserController {
     
     const { name, lastName, email } = req.body;
 
-    const query = `INSERT INTO user(name, lastName, email) VALUES ("${name}", "${lastName}", "${email}")`;
+    const query = `INSERT INTO users (name, lastName, email) VALUES ("${name}", "${lastName}", "${email}")`;
 
     connection.query(query).then(result => {
       res.status(200).send({ success: true, result }); 
@@ -80,7 +82,7 @@ class UserController {
     const { name, lastName, email } = req.body;
 
   // Construye la query con los datos proporcionados
-  let query = 'UPDATE user SET ';
+  let query = 'UPDATE users SET ';
   const updates = [];
   
   if (name) updates.push(`name = "${name}"`);
@@ -104,7 +106,7 @@ class UserController {
   deleteUser = (req, res) => {
     const { id } = req.params;
 
-    const query = `DELETE FROM user WHERE id = ${id}`;
+    const query = `DELETE FROM users WHERE id = ${id}`;
   
     connection.query(query).then(result => {
       res.status(200).send({ success: true, message: `Usuario con ID ${id} eliminado con éxito` }); 

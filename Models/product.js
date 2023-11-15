@@ -1,4 +1,4 @@
-import { DataType as DT, Model } from "sequelize";
+import { DataTypes as DT, Model } from "sequelize";
 import connection from "../connection/connection.js";
 
 class Product extends Model {

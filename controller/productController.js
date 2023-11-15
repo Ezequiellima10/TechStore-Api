@@ -5,7 +5,7 @@ class ProductController {
 
 
   getAllProducts = (req, res) => {
-    const query = `select * from product`;
+    const query = `select * from products`;
 
     connection.query(query).then(result => {
       res.status(200).send({ success: true, result }); 
@@ -18,7 +18,7 @@ class ProductController {
   getProductById = (req, res) => {
     const { id } = req.params;
   
-    const query = `SELECT * FROM product WHERE id = ${id}`;
+    const query = `SELECT * FROM products WHERE id = ${id}`;
   
     connection.query(query).then(result => {
       res.status(200).send({ success: true, product: result[0] }); 
@@ -32,7 +32,7 @@ class ProductController {
     
     const { name, precio, stock } = req.body;
 
-    const query = `INSERT INTO product(name, precio, stock) VALUES ("${name}", "${precio}", "${stock}")`;
+    const query = `INSERT INTO products (name, precio, stock) VALUES ("${name}", "${precio}", "${stock}")`;
 
     connection.query(query).then(result => {
       res.status(200).send({ success: true, result }); 
@@ -48,7 +48,7 @@ class ProductController {
     const { name, precio, stock } = req.body;
 
   // Construye la query con los datos proporcionados
-  let query = 'UPDATE product SET ';
+  let query = 'UPDATE products SET ';
   const updates = [];
   
   if (name) updates.push(`name = "${name}"`);
