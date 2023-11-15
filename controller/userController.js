@@ -1,6 +1,7 @@
 import connection from "../connection/connection.js";
 import Product from "../Models/product.js";
 import User from "../Models/user.js";
+import UserProduct from "../Models/userProduct.js";
 class UserController {
   constructor() {} 
 
@@ -18,11 +19,11 @@ class UserController {
       if (!user || !product) {
         return res.status(404).json({ message: 'Usuario o producto no encontrado' });
       }  
-  
+      
       // Agrega la relación entre el usuario y el producto en la tabla intermedia
       await UserProduct.create({
-        UserId: userId,
-        ProductId: productId,
+        userId: userId,
+        productId: productId,
       });
   
       return res.status(201).json({ message: 'Producto agregado al usuario con éxito' });
@@ -81,7 +82,7 @@ class UserController {
     const { name, lastName, email } = req.body;
 
   // Construye la query con los datos proporcionados
-  let query = 'UPDATE user SET ';
+  let query = 'UPDATE users SET ';
   const updates = [];
   
   if (name) updates.push(`name = "${name}"`);
