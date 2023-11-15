@@ -6,8 +6,9 @@ class UserController {
 
 
   addProductToUser = async (req, res) => {
-    const userId = req.params.userId; //Obtengo los ids  del usuario y producto pasados por paramtetro
-    const { productId } = req.body; 
+    const userId = req.params.id; //Obtengo los ids  del usuario y producto pasados por paramtetro
+    const productId = req.body.productId; 
+
   
     try {
       // Verificar si el usuario y el producto existen
@@ -45,7 +46,7 @@ class UserController {
   getUserById = (req, res) => {
     const { id } = req.params;
   
-    const query = `SELECT * FROM user WHERE id = ${id}`;
+    const query = `SELECT * FROM users WHERE id = ${id}`;
   
     connection.query(query).then(result => {
       res.status(200).send({ success: true, user: result[0] }); 
@@ -59,7 +60,7 @@ class UserController {
     
     const { name, lastName, email } = req.body;
 
-    const query = `INSERT INTO user(name, lastName, email) VALUES ("${name}", "${lastName}", "${email}")`;
+    const query = `INSERT INTO users (name, lastName, email) VALUES ("${name}", "${lastName}", "${email}")`;
 
     connection.query(query).then(result => {
       res.status(200).send({ success: true, result }); 
@@ -104,7 +105,7 @@ class UserController {
   deleteUser = (req, res) => {
     const { id } = req.params;
 
-    const query = `DELETE FROM user WHERE id = ${id}`;
+    const query = `DELETE FROM users WHERE id = ${id}`;
   
     connection.query(query).then(result => {
       res.status(200).send({ success: true, message: `Usuario con ID ${id} eliminado con éxito` }); 
