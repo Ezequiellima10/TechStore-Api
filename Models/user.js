@@ -1,6 +1,6 @@
-import { DataType as DT, Model } from "sequelize";
+import { DataTypes as DT, Model } from "sequelize";
 import connection from "../connection/connection.js";
-import bcrypt from "../bcrypt/bcrypt";
+import bcrypt from "bcrypt";
 
 class User extends Model {
 
@@ -32,8 +32,14 @@ User.init(
           isEmail: {
             msg: "Tiene que tener formato de email",
           },
-          notEmpty: {
+          _notEmpty: {
             msg: "no puede estar vacio",
+          },
+          get notEmpty() {
+            return this._notEmpty;
+          },
+          set notEmpty(value) {
+            this._notEmpty = value;
           },
         },
       },

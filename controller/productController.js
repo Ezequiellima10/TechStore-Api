@@ -2,6 +2,8 @@ import connection from "../connection/connection.js";
 
 class ProductController {
   constructor() {}
+
+
   getAllProducts = (req, res) => {
     const query = `select * from product`;
 
@@ -11,6 +13,8 @@ class ProductController {
       throw err; 
     });
   };
+
+
   getProductById = (req, res) => {
     const { id } = req.params;
   
@@ -22,6 +26,8 @@ class ProductController {
       throw err; 
     });
   };
+
+
   createProduct = (req, res) => {
     
     const { name, precio, stock } = req.body;
@@ -34,6 +40,8 @@ class ProductController {
       throw err; 
     }); 
   };
+
+
   updateProduct = (req, res) => {
     const { id } = req.params;
 
@@ -59,6 +67,8 @@ class ProductController {
       throw err; 
     });
   };
+
+  
   deleteProduct = (req, res) => {
     const { id } = req.params;
 

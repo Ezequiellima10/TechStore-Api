@@ -1,4 +1,4 @@
-import { DataType as DT, Model } from "sequelize";
+import { DataTypes as DT, Model } from "sequelize";
 import connection from "../connection/connection.js";
 
 class Product extends Model {
@@ -17,7 +17,7 @@ Product.init(
       },
       
       precio: {
-        type: DT.FLOAT,
+        type: DT.DECIMAL(10,2),
         allowNull: false,
   
         set(value) {
