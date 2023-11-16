@@ -1,7 +1,7 @@
 import connection from "../connection/connection.js";
-import Product from "../Models/product.js";
-import User from "../Models/user.js";
-import UserProduct from "../Models/userProduct.js";
+import Product from "../Models/Product.js";
+import User from "../Models/User.js";
+import UserProduct from "../Models/UserProduct.js";
 class UserController {
   constructor() {} 
 
