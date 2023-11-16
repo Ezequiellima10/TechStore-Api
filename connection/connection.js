@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-const database = "Techstore";
+const database = DATABASE_NAME;
 const username = "root";
 const password = ""; //para windows dejar vacio
 const dialect = "mysql";
