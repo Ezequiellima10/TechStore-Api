@@ -3,11 +3,10 @@ import connection from "../connection/connection.js";
 import bcrypt from "bcrypt";
 
 class User extends Model {
-
-    validatePassword = async (myPlaintextPassword) => {
-        const validate = await bcrypt.hash(myPlaintextPassword, this.salt);
-        return validate===this.password
-      };
+  validatePassword = async (myPlaintextPassword) => {
+    const validate = await bcrypt.hash(myPlaintextPassword, this.salt);
+    return validate === this.password;
+  };
 }
 
 User.init(
@@ -28,18 +27,14 @@ User.init(
       },
       email: {
         type: DT.STRING,
+        allowNull: false,
+        unique: true,
         validate: {
           isEmail: {
             msg: "Tiene que tener formato de email",
           },
-          _notEmpty: {
-            msg: "no puede estar vacio",
-          },
-          get notEmpty() {
-            return this._notEmpty;
-          },
-          set notEmpty(value) {
-            this._notEmpty = value;
+          notEmpty: {
+            msg: "no puede estar vacío",
           },
         },
       },
@@ -58,12 +53,18 @@ User.init(
   );
   
   User.beforeCreate(async (user) => {
-    const salt = await bcrypt.genSalt();
-    user.salt = salt;
+    try {
+      if (user.password) {
+        const salt = await bcrypt.genSalt();
+        user.salt = salt;
   
-    const passwordHash = await bcrypt.hash(user.password, salt);
-    // const passwordHash= await bcrypt.hash(user.password, 10)
-    user.password = passwordHash;
+        const passwordHash = await bcrypt.hash(user.password, salt);
+        user.password = passwordHash;
+      }
+    } catch (error) {
+      console.error("Error al generar la sal y cifrar la contraseña:", error);
+      throw error;
+    }
   });
   
   export default User;
