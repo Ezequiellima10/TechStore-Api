@@ -1,12 +1,12 @@
 import { Sequelize } from "sequelize";
+import { DATABASE_NAME, DATABASE_PORT, DATABASE_HOST, DATABASE_USERNAME } from "../config/config.js";
 
 const database = DATABASE_NAME;
-const username = "root";
+const username = DATABASE_USERNAME;
 const password = ""; //para windows dejar vacio
 const dialect = "mysql";
-const host = "localhost";
-const port = 3306;
-
+const host = DATABASE_HOST;
+const port = DATABASE_PORT;
 
 const connection = new Sequelize(database, username, password, {
     host,
